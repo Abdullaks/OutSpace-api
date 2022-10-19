@@ -1,12 +1,20 @@
 const mongoose = require("mongoose");
 
-mongoose
-  .connect("mongodb://127.0.0.1:27017/SocialMedia", {
-    useNewUrlParser: true,
-  })
-  .then(() => {
-    console.log("db connected...");
-  })
-  .catch((e) => {
-    console.log("db not connected");
-  });
+  const dbConnect = async () => {
+    try {
+      await mongoose
+        .connect(process.env.MONGODB_URL, {
+          useUnifiedTopology: true,
+          useNewUrlParser: true,
+        })
+        .then(() => {
+          console.log("DB Connetion Successfull");
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    } catch (error) {
+      console.log(`Error ${error.message}`);
+    }
+  };
+  module.exports = dbConnect;

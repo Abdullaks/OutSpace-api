@@ -4,7 +4,7 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv").config();
-const connectDB = require("./config/db");
+const dbConnect = require("./config/db");
 const cors = require("cors");
 const userRouter = require("./routes/userRouter");
 const authRouter = require("./routes/authRouter");
@@ -12,8 +12,9 @@ const adminRouter = require("./routes/adminRouter");
 const postRouter = require("./routes/postRouter");
 const uploadRouter = require("./routes/uploadRouter");
 const chatRouter = require("./routes/chatRouter");
+// const { db } = require("./models/userModel");
 const app = express();
-
+dbConnect()
 //middlewares
 app.use(
   cors({
