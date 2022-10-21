@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev":"nodemon index.js"
+    "dev": "nodemon index.js"
   },
   "author": "Abdulla",
   "license": "ISC",
@@ -22,7 +22,7 @@
     "mongoose": "^6.5.3",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.19",
-    "socket.io": "^4.5.2",
+    "socket.io": "^1.7.3",
     "twilio": "^3.81.0"
   }
 }
