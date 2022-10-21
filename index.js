@@ -18,7 +18,7 @@ dbConnect()
 //middlewares
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ["https://out-space-client.vercel.app"],
     method: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   })
@@ -48,7 +48,7 @@ const server = app.listen(8800, () => {
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://out-space-client.vercel.app",
   },
 });
 

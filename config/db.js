@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+    
   const dbConnect = async () => {
     try {
       await mongoose
@@ -17,4 +17,4 @@ const mongoose = require("mongoose");
       console.log(`Error ${error.message}`);
     }
   };
-  module.exports = dbConnect;
+  module.exports = dbConnect; 
