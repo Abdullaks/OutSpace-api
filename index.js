@@ -47,7 +47,7 @@ const server = app.listen(8800, () => {
 });
 
 const io = require("socket.io")(server, {
-  pingTimeout: 60000,
+  // pingTimeout: 60000,
   cors: {
     origin: "https://out-space-client.vercel.app",
   },
