@@ -15,6 +15,7 @@ const chatRouter = require("./routes/chatRouter");
 // const { db } = require("./models/userModel");
 const app = express();
 dbConnect()
+
 //middlewares
 app.use(
   cors({
@@ -76,9 +77,8 @@ io.on("connection", (socket) => {
       socket.in(user).emit("message recieved", newMessageRecieved);
     });
   });
-
-  socket.off("setup", () => {
-    console.log("USER DISCONNECTED");
-    socket.leave(userData._id);
-  });
+  // socket.off("setup", () => {
+  //   console.log("USER DISCONNECTED");
+  //   socket.leave(userData._id);
+  // });
 });
