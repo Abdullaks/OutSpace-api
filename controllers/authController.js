@@ -74,13 +74,14 @@ const registerUser = async (req, res) => {
 //CREATE JWT TOKEN
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "30d",
+    expiresIn: "3d",
   });
 };
 
 //lOGIN USER
 const loginUser = async (req, res) => {
   try {
+    console.log(req.body);
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
       return res.status(404).json("user not found");
@@ -101,7 +102,7 @@ const loginUser = async (req, res) => {
       email: user.email,
       mobile: user.mobile,
       profilePicture: user.profilePicture ? user.profilePicture : null,
-      savedPosts: user.savedPosts? user.savedPosts:null,
+      savedPosts: user.savedPosts ? user.savedPosts : null,
       token: generateToken(user._id),
     });
   } catch (error) {
@@ -113,6 +114,8 @@ const loginUser = async (req, res) => {
 //USER VERIFICATION
 const checkUser = async (req, res) => {
   try {
+    console.log("req.body");
+    console.log(req.body);
     const existingMail = await User.findOne({ email: req.body.email });
     const existingName = await User.findOne({ username: req.body.username });
     if (existingMail) {

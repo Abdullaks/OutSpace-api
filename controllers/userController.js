@@ -23,17 +23,12 @@ const getProfile = async (req, res) => {
         path: "savedPosts",
         populate: {
           path: "post",
-          populate:{
-            path:"user",
-          }
+          populate: {
+            path: "user",
+          },
         },
       });
-      
 
-
-
-
-        
     const followCheck = {
       following: false,
     };

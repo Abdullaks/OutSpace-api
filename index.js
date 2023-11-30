@@ -14,12 +14,13 @@ const uploadRouter = require("./routes/uploadRouter");
 const chatRouter = require("./routes/chatRouter");
 // const { db } = require("./models/userModel");
 const app = express();
-dbConnect()
+dbConnect();
 
 //middlewares
 app.use(
   cors({
-    origin: ["https://out-space-client.vercel.app"],
+    // origin: ["https://out-space-client.vercel.app"],
+    origin: "http://localhost:3000",
     method: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   })
