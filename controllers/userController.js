@@ -91,7 +91,6 @@ const updateCoverPicture = async (req, res) => {
 
 //update user profile bio
 const updateBio = async (req, res) => {
-  console.log(req.body, "req.body");
   try {
     const updated = await User.findByIdAndUpdate(
       req.user.id,
@@ -102,7 +101,6 @@ const updateBio = async (req, res) => {
         new: true,
       }
     );
-    console.log(updated);
     res.json(updated);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -194,7 +192,6 @@ const allUsers = async (req, res) => {
     const users = await User.find(searchTerm).find({
       _id: { $ne: req.user.id },
     });
-    console.log(users);
     res.send(users);
   } catch (error) {
     res.status(500).json({ message: error.message });

@@ -12,14 +12,12 @@ const adminRouter = require("./routes/adminRouter");
 const postRouter = require("./routes/postRouter");
 const uploadRouter = require("./routes/uploadRouter");
 const chatRouter = require("./routes/chatRouter");
-// const { db } = require("./models/userModel");
 const app = express();
 dbConnect();
 
 //middlewares
 app.use(
   cors({
-    // origin: ["https://out-space-client.vercel.app"],
     origin: "http://localhost:3000",
     method: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
@@ -55,7 +53,6 @@ const io = require("socket.io")(server, {
 });
 
 io.on("connection", (socket) => {
-  // console.log("Connection to socket");
   socket.on("setup", (userData) => {
     socket.join(userData._id);
     socket.emit("connected");
@@ -63,23 +60,20 @@ io.on("connection", (socket) => {
 
   socket.on("join chat", (room) => {
     socket.join(room);
-    console.log("User Joined Room: " + room);
   });
 
   socket.on("new message", (newMessageRecieved) => {
     var chat = newMessageRecieved.conversationId;
 
-    if (!chat.members) return console.log("chat.member not defined");
+    if (!chat.members) return;
 
     chat.members.forEach((user) => {
-      console.log(user);
       if (user == newMessageRecieved.sender._id) return;
 
       socket.in(user).emit("message recieved", newMessageRecieved);
     });
   });
   // socket.off("setup", () => {
-  //   console.log("USER DISCONNECTED");
   //   socket.leave(userData._id);
   // });
 });

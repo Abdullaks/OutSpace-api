@@ -47,8 +47,6 @@ const getSinglePost = async (req, res) => {
 // CREATE comment
 const comment = async (req, res) => {
   try {
-    console.log("comment controller");
-    console.log(req.body);
     const { postId, userId, text } = req.body;
     const comment = await new Comment({
       Post: postId,
