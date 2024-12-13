@@ -6,12 +6,12 @@ const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv").config();
 const dbConnect = require("./config/db");
 const cors = require("cors");
-const userRouter = require("./routes/userRouter");
-const authRouter = require("./routes/authRouter");
-const adminRouter = require("./routes/adminRouter");
-const postRouter = require("./routes/postRouter");
-const uploadRouter = require("./routes/uploadRouter");
-const chatRouter = require("./routes/chatRouter");
+const userRouter = require("./routes/user/userRouter");
+const authRouter = require("./routes/auth/authRouter");
+const adminRouter = require("./routes/admin/adminRouter");
+const postRouter = require("./routes/post/postRouter");
+const uploadRouter = require("./routes/upload/uploadRouter");
+const chatRouter = require("./routes/chat/chatRouter");
 const app = express();
 dbConnect();
 
