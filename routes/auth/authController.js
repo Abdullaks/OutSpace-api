@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const User = require("../models/userModel");
-const Admin = require("../models/adminModel");
+const User = require("../../models/userModel");
+const Admin = require("../../models/adminModel");
 const ServiceSID = process.env.ServiceSID;
 const AccountSID = process.env.AccountSID;
 const authToken = process.env.authToken;
@@ -27,14 +27,12 @@ const loginAdmin = async (req, res) => {
       token: generateToken(admin._id),
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json(error);
   }
 };
 
 //REGISTER
 const registerUser = async (req, res) => {
-  console.log(req.body);
   try {
     //check if user is already registered
     const userExist = await User.findOne({ email: req.body.email });
@@ -55,7 +53,6 @@ const registerUser = async (req, res) => {
 
     //save the new user and response
     const user = await newUser.save();
-    console.log(user, "sdfghjk");
     if (user) {
       res.status(200).json({
         _id: user.id,
@@ -66,7 +63,6 @@ const registerUser = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
     res.status(500).json(error);
   }
 };
@@ -81,7 +77,6 @@ const generateToken = (id) => {
 //lOGIN USER
 const loginUser = async (req, res) => {
   try {
-    console.log(req.body);
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
       return res.status(404).json("user not found");
@@ -106,7 +101,6 @@ const loginUser = async (req, res) => {
       token: generateToken(user._id),
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json(error);
   }
 };
@@ -114,15 +108,11 @@ const loginUser = async (req, res) => {
 //USER VERIFICATION
 const checkUser = async (req, res) => {
   try {
-    console.log("req.body");
-    console.log(req.body);
     const existingMail = await User.findOne({ email: req.body.email });
     const existingName = await User.findOne({ username: req.body.username });
     if (existingMail) {
-      console.log("exist email");
       res.status(200).json("emailExist");
     } else if (existingName) {
-      console.log("exist name");
       res.status(200).json("nameExist");
     } else {
       res.status(200).json("noUser");
@@ -139,10 +129,8 @@ const otpSend = async (req, res) => {
       to: `+91${req.body.mobile}`,
       channel: "sms",
     });
-    console.log("otp send");
     res.status(200).json("success");
   } catch (err) {
-    console.log("error");
     res.status(500).json(err);
   }
 };
@@ -157,17 +145,13 @@ const otpConfirmation = async (req, res) => {
         code: req.body.otp,
       })
       .then((response) => {
-        console.log(response);
         if (response.valid) {
-          console.log("otp validated");
           res.status(200).json("otpConfirmed");
         } else {
-          console.log("otp failed");
           res.status(500).json("OtpNotConfirmed");
         }
       });
   } catch (err) {
-    console.log("error");
     res.status(500).json(err);
   }
 };
@@ -177,7 +161,6 @@ const verifyMobile = async (req, res) => {
   try {
     const user = await User.findOne({ mobile: req.body.mobile });
     if (user) {
-      console.log("Mobile Exist");
       res.status(200).json(user.mobile);
     } else {
       res.status(200).json("noMobile");
@@ -200,7 +183,6 @@ const updatePassword = async (req, res) => {
       { mobile: req.body.mobile },
       { $set: { password: hashedPassword } }
     );
-    console.log(password, " forgot Password changed");
     const newUser = await password.save();
     res.status(200).json("forgot Password changed");
   } catch (error) {

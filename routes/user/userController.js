@@ -1,6 +1,5 @@
-const bcrypt = require("bcrypt");
-const User = require("../models/userModel");
-const Post = require("../models/postModel");
+const User = require("../../models/userModel");
+const Post = require("../../models/postModel");
 
 //get profile
 const getProfile = async (req, res) => {

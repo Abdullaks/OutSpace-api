@@ -17,11 +17,8 @@ const verifyUser = async (req, res, next) => {
 
       // Get user from token
       req.user = await User.findById(decoded.id).select("-password");
-      console.log("verified user from token");
       next();
     } catch (error) {
-      console.log(" not verified user from token");
-      console.log(error);
       res.status(401);
       throw new Error("Not Authorized");
     }
